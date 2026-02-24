@@ -21,22 +21,22 @@
 <body>
 
     <nav class="no-print sticky top-0 z-50 glass px-4 py-3 border-b shadow-sm">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-sky-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">HK</div>
-                <h1 class="font-amiri text-xl font-bold text-sky-600">رواق كوثر</h1>
-            </div>
-            <div class="flex items-center gap-2">
-                <button onclick="toggleDarkMode()" class="p-2 text-sky-500"><i class="fas fa-adjust text-xl"></i></button>
-                <div class="flex bg-gray-100 dark:bg-slate-800 p-1 rounded-2xl scale-90 md:scale-100 shadow-inner">
-                    <button onclick="switchTab('shop')" id="btn-shop" class="active-tab px-4 py-2 rounded-xl text-xs font-bold transition">المتجر</button>
-                    <button onclick="switchTab('track')" id="btn-track" class="px-4 py-2 text-xs font-bold opacity-60 transition">تتبع</button>
-                    <button onclick="protectedTab('admin')" id="btn-admin" class="px-4 py-2 text-xs font-bold opacity-60 transition">الإدارة</button>
-                </div>
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <img src="https://prodigits.co.uk/thumbs/wallpapers/p2/f/nature/logo_b44865181119567.jpg" 
+                 class="w-12 h-12 rounded-full border-2 border-sky-500 shadow-sm object-cover">
+            <h1 class="font-amiri text-2xl font-bold text-sky-600">رواق كوثر</h1>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="toggleDarkMode()" class="p-2 text-sky-500"><i class="fas fa-adjust text-xl"></i></button>
+            <div class="flex bg-gray-100 dark:bg-slate-800 p-1 rounded-2xl scale-90 md:scale-100 shadow-inner">
+                <button onclick="switchTab('shop')" id="btn-shop" class="active-tab px-4 py-2 rounded-xl text-xs font-bold transition">المتجر</button>
+                <button onclick="switchTab('track')" id="btn-track" class="px-4 py-2 text-xs font-bold opacity-60 transition">تتبع</button>
+                <button onclick="protectedTab('admin')" id="btn-admin" class="px-4 py-2 text-xs font-bold opacity-60 transition">الإدارة</button>
             </div>
         </div>
-    </nav>
-
+    </div>
+</nav>
     <main class="max-w-6xl mx-auto p-4">
         
         <section id="sec-shop" class="space-y-10 py-6">
@@ -166,42 +166,56 @@
         };
 
         function updateUI() {
-            const gallery = document.getElementById('books-gallery');
-            const adminInv = document.getElementById('admin-inventory-list');
-            
-            if (inventory.length === 0) {
-                gallery.className = "col-span-full py-20 text-center";
-                gallery.innerHTML = `<div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center text-sky-500 text-2xl mx-auto mb-4 animate-pulse"><i class="fas fa-book-open"></i></div><h3 class="font-amiri text-2xl font-bold text-sky-600">أهلاً بكِ في رواقكِ يا كوثر!</h3><p class="opacity-70 text-sm">أضيفي كتبكِ من قسم الإدارة.</p>`;
-                adminInv.innerHTML = `<p class="col-span-full text-center text-xs opacity-40">المتجر فارغ</p>`;
-            } else {
-                gallery.className = "grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6";
-                gallery.innerHTML = inventory.map((b, idx) => `
-                    <div class="glass p-4 rounded-3xl text-center shadow-sm hover:scale-105 transition cursor-pointer" onclick="openOrderModal(${idx})">
-                        <img src="${b.img}" class="h-44 w-full object-cover rounded-2xl mb-3 shadow-sm">
-                        <h3 class="font-bold text-[11px] truncate">${b.title}</h3>
-                        <p class="text-sky-500 font-bold text-sm">${b.price} دج</p>
-                    </div>`).join('');
-                
-                adminInv.innerHTML = inventory.map((b, idx) => `
-                    <div class="relative bg-gray-50 dark:bg-slate-700 p-2 rounded-2xl border dark:border-slate-600">
-                        <img src="${b.img}" class="h-16 w-full object-cover rounded-xl mb-1">
-                        <p class="text-[9px] font-bold truncate">${b.title}</p>
-                        <button onclick="delBook(${idx})" class="absolute -top-1 -left-1 bg-red-500 text-white w-6 h-6 rounded-full text-[10px] shadow-lg"><i class="fas fa-times"></i></button>
-                    </div>`).join('');
-            }
+    const gallery = document.getElementById('books-gallery');
+    const adminInv = document.getElementById('admin-inventory-list');
+    const logoUrl = "https://prodigits.co.uk/thumbs/wallpapers/p2/f/nature/logo_b44865181119567.jpg";
+    
+    if (inventory.length === 0) {
+        gallery.className = "col-span-full py-16 text-center flex flex-col items-center justify-center";
+        gallery.innerHTML = `
+            <div class="relative mb-6">
+                <img src="${logoUrl}" class="w-32 h-32 rounded-full border-4 border-sky-100 shadow-2xl mx-auto animate-pulse">
+                <div class="absolute -bottom-2 -right-2 bg-sky-500 text-white p-2 rounded-full shadow-lg">
+                    <i class="fas fa-book-open"></i>
+                </div>
+            </div>
+            <h3 class="font-amiri text-3xl font-bold text-sky-600 mb-2">أهلاً بكِ في رواقكِ يا كوثر!</h3>
+            <p class="opacity-70 text-sm max-w-sm mx-auto leading-relaxed italic">
+                "المكان الذي يسكن فيه الحرف وتولد فيه الحكاية.. ابدئي بإضافة كتبكِ الآن لتفتحي أبواب الرواق للقرّاء."
+            </p>
+        `;
+        adminInv.innerHTML = `<p class="col-span-full text-center text-xs opacity-40 py-10 italic">لا توجد كتب في الرفوف حالياً..</p>`;
+    } else {
+        gallery.className = "grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6";
+        gallery.innerHTML = inventory.map((b, idx) => `
+            <div class="glass p-4 rounded-3xl text-center shadow-sm hover:scale-105 transition cursor-pointer" onclick="openOrderModal(${idx})">
+                <img src="${b.img}" class="h-44 w-full object-cover rounded-2xl mb-3 shadow-sm border border-gray-100">
+                <h3 class="font-bold text-[11px] truncate text-sky-800">${b.title}</h3>
+                <p class="text-sky-500 font-bold text-sm mt-1">${b.price} دج</p>
+            </div>`).join('');
+        
+        adminInv.innerHTML = inventory.map((b, idx) => `
+            <div class="relative bg-gray-50 dark:bg-slate-700 p-2 rounded-2xl border dark:border-slate-600">
+                <img src="${b.img}" class="h-16 w-full object-cover rounded-xl mb-1">
+                <p class="text-[9px] font-bold truncate">${b.title}</p>
+                <button onclick="delBook(${idx})" class="absolute -top-1 -left-1 bg-red-500 text-white w-6 h-6 rounded-full text-[10px] shadow-lg flex items-center justify-center hover:bg-red-600">
+                    <i class="fas fa-times text-[8px]"></i>
+                </button>
+            </div>`).join('');
+    }
 
-            document.getElementById('total-revenue').innerText = orders.reduce((s,o) => s+Number(o.price), 0) + " دج";
-            document.getElementById('order-count').innerText = orders.length;
+    document.getElementById('total-revenue').innerText = orders.reduce((s,o) => s+Number(o.price), 0) + " دج";
+    document.getElementById('order-count').innerText = orders.length;
 
-            document.getElementById('admin-orders-list').innerHTML = orders.map(o => `
-                <div class="glass p-4 rounded-2xl flex justify-between items-center border-r-4 border-sky-500 shadow-sm mb-3">
-                    <div><p class="font-bold text-sm">${o.name}</p><p class="text-[10px] opacity-60">${o.book} | ${o.wilaya}</p></div>
-                    <div class="flex gap-1">
-                        <button onclick="printBill('${o.oid}')" class="text-sky-500 p-2"><i class="fas fa-print"></i></button>
-                        <button onclick="delOrder('${o.oid}')" class="text-red-400 p-2"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>`).join('');
-        }
+    document.getElementById('admin-orders-list').innerHTML = orders.map(o => `
+        <div class="glass p-4 rounded-2xl flex justify-between items-center border-r-4 border-sky-500 shadow-sm mb-3">
+            <div><p class="font-bold text-sm">${o.name}</p><p class="text-[10px] opacity-60">${o.book} | ${o.wilaya}</p></div>
+            <div class="flex gap-1">
+                <button onclick="printBill('${o.oid}')" class="text-sky-500 p-2 hover:bg-sky-50 rounded-lg transition"><i class="fas fa-print"></i></button>
+                <button onclick="delOrder('${o.oid}')" class="text-red-400 p-2 hover:bg-red-50 rounded-lg transition"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>`).join('');
+}
 
         function delBook(idx) { if(confirm('حذف الكتاب من المتجر؟')) { inventory.splice(idx, 1); localStorage.setItem('HK_INV', JSON.stringify(inventory)); updateUI(); } }
 
@@ -280,5 +294,6 @@
     </script>
 </body>
 </html>
+
 
 
