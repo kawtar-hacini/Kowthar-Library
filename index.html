@@ -7,16 +7,39 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap');
-        :root { --sky: #0EA5E9; --bg: #F8FAFC; --text: #1E293B; --card: #ffffff; }
-        .dark-mode { --bg: #0F172A; --text: #F1F5F9; --card: #1E293B; }
-        body { font-family: 'Cairo', sans-serif; background-color: var(--bg); color: var(--text); transition: 0.3s; margin:0; }
-        .font-amiri { font-family: 'Amiri', serif; }
-        .glass { background: var(--card); border: 1px solid rgba(14, 165, 233, 0.1); backdrop-filter: blur(10px); }
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; backdrop-filter: blur(8px); align-items: center; justify-content: center; }
-        .active-tab { background-color: var(--sky) !important; color: white !important; opacity: 1 !important; }
-        @media print { .no-print { display: none !important; } #thermal-area { display: block !important; width: 80mm; color: black; background: white; padding: 10px; direction: rtl; } }
-        .logo-img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--sky); background: white; }
+       /* الألوان الجديدة المستوحاة من الشعار */
+:root { 
+    --hk-purple: #4B245D; /* البنفسجي الموجود في شعارك */
+    --hk-light: #FDFBFF; 
+    --hk-accent: #7D4B92;
+    --bg: #F8F7F9; 
+    --text: #2D1B36; 
+    --card: #ffffff; 
+}
+
+/* تحديث ألوان الأزرار والخلفيات */
+.bg-sky-500 { background-color: var(--hk-purple) !important; }
+.text-sky-600, .text-sky-500 { color: var(--hk-purple) !important; }
+.border-sky-500 { border-color: var(--hk-purple) !important; }
+.bg-sky-50 { background-color: #F5EEF8 !important; }
+.active-tab { background-color: var(--hk-purple) !important; }
+
+/* تأثيرات الزجاج (Glassmorphism) بلمسة بنفسجية */
+.glass { 
+    background: var(--card); 
+    border: 1px solid rgba(75, 36, 93, 0.1); 
+}
+
+/* تحسين الخط ليناسب هوية الرواق */
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+/* تغيير لون الأيقونات */
+.fas, .fab { color: var(--hk-purple); }
+.text-white .fas { color: white; }
     </style>
 </head>
 <body>
@@ -281,3 +304,4 @@
     </script>
 </body>
 </html>
+
